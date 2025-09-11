@@ -3,31 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Rich Monkey Investments</title>
+    <title>The Rich Monkey Investments - Smart Financial Solutions</title>
     <meta name="description" content="The Rich Monkey Investments provides smart financial solutions including stock investments, portfolio management, trading strategies, and personal finance tailored for the Indian market.">
     
     <!-- Performance Optimization: Preconnect and Font Loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        dark: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.7s ease-out forwards',
+                        'pulse-slow': 'pulse 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --dark: #0d0d0d;
+            --darker: #090909;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d;
+            background-color: var(--darker);
             color: #e5e7eb;
+            scroll-behavior: smooth;
         }
-        .hero-bg-image {
-            background-image: url('https://i.ibb.co/N6mHXr4t/20250903-1443-Candlestick-Chart-Background-remix-01k47dgw55e259aak0k53zm2xe.png" alt="20250903-1443-Candlestick-Chart-Background-remix-01k47dgw55e259aak0k53zm2xe" border="0"');
+        
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.95)), 
+                        url('https://i.ibb.co/N6mHXr4t/20250903-1443-Candlestick-Chart-Background-remix-01k47dgw55e259aak0k53zm2xe.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-        .hover-border-green {
-            transition: transform 0.3s ease, border-color 0.3s ease;
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
         }
-        .hover-border-green:hover {
-            transform: scale(1.05);
+        
+        .card-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15);
             border-color: #10B981;
         }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #10B981, #34D399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #10B981, #059669);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.5s;
+            stroke-linecap: round;
+        }
+        
+        .input-field {
+            transition: all 0.3s;
+        }
+        
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+        
+        /* Loading animation for calculator */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #10B981;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         /* A utility class for screen readers */
         .sr-only {
             position: absolute;
@@ -40,85 +165,143 @@
             white-space: nowrap;
             border-width: 0;
         }
-         input[type="number"]::-webkit-outer-spin-button,
+        
+        input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
+        
+        /* Animation classes */
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
     </style>
 </head>
-<body class="bg-[#0d0d0d] text-gray-200 antialiased">
+<body class="bg-dark-950 text-gray-200 antialiased">
 
     <!-- Header Section -->
-    <header class="bg-[#0d0d0d] shadow-lg sticky top-0 z-50">
+    <header class="bg-dark-950 shadow-lg sticky top-0 z-50 border-b border-gray-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-green-500">The Rich Monkey<br><span class="text-sm font-normal text-gray-400">INVESTMENTS</span></a>
+            <a href="#" class="text-2xl font-bold text-primary-500 flex items-center">
+                <span class="mr-2">🐵</span>
+                <span>The Rich Monkey<br><span class="text-sm font-normal text-gray-400">INVESTMENTS</span></span>
+            </a>
             <div class="space-x-8 hidden md:flex font-medium">
-                <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">Home</a>
-                <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-300">Services</a>
-                <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300">About</a>
-                <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
+                <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 relative group">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-300 relative group">
+                    Services
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300 relative group">
+                    About
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-300 relative group">
+                    Contact
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
+                </a>
             </div>
             <!-- Mobile Menu Button with Accessibility Improvements -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none focus:text-white" aria-controls="mobile-menu" aria-expanded="false">
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none focus:text-white p-2 rounded-md hover:bg-gray-800" aria-controls="mobile-menu" aria-expanded="false">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
+                <span class="sr-only">Open main menu</span>
             </button>
         </nav>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#0d0d0d]">
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
-                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Services</a>
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Home</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Services</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">About</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Contact</a>
             </div>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section class="min-h-screen flex items-center px-4 md:px-12 py-16 bg-cover bg-center hero-bg-image">
+        <section class="min-h-screen flex items-center px-4 md:px-12 py-16 hero-bg">
             <div class="container mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-20">
-                <div class="md:w-1/2 text-center md:text-left">
+                <div class="md:w-1/2 text-center md:text-left animate-slide-up">
                     <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
-                        Start your <span class="text-green-500">Financial Freedom</span> journey with us
+                        Start your <span class="gradient-text">Financial Freedom</span> journey with us
                     </h1>
                     <!-- Improved color contrast -->
                     <p class="text-lg md:text-xl text-gray-300 mb-8">
                         Leading financial experts specializing in stock investments, portfolio management, trading strategies, and personal finance solutions tailored for the Indian market.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                        <a href="#contact" class="bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300 transform hover:scale-105">Start Your Journey</a>
-                        <a href="#services" class="text-white border-2 border-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-gray-900 transition-colors duration-300 transform hover:scale-105">Explore Services</a>
+                        <a href="#contact" class="bg-primary-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-primary-600 transition-all duration-300 transform hover:scale-105 flex items-center">
+                            Start Your Journey
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                        <a href="#services" class="text-white border-2 border-gray-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105 flex items-center">
+                            Explore Services
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
-                <div class="md:w-1/2 flex justify-center">
+                <div class="md:w-1/2 flex justify-center animate-fade-in delay-300">
                     <!-- Lazy-loading and descriptive alt text -->
-                    <img src="https://i.ibb.co/qMdzkqtD/20250903-1348-Digital-Analytics-Dashboard-simple-compose-01k47aeem7e63sm2gxe9c2p27q.png" alt="20250903-1348-Digital-Analytics-Dashboard-simple-compose-01k47aeem7e63sm2gxe9c2p27q" border="0">
+                    <img src="https://i.ibb.co/qMdzkqtD/20250903-1348-Digital-Analytics-Dashboard-simple-compose-01k47aeem7e63sm2gxe9c2p27q.png" alt="Financial dashboard showing investment analytics" class="rounded-xl shadow-2xl max-w-full h-auto" loading="lazy">
                 </div>
             </div>
         </section>
 
         <!-- Stats Section -->
-        <section class="py-12 bg-gray-900">
-            <div class="container mx-auto px-6 text-center">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div>
-                        <h3 class="text-4xl font-extrabold text-green-500">500+</h3>
+        <section class="py-16 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                    <div class="stat-card bg-gray-800 p-6 rounded-lg animate-slide-up delay-100">
+                        <h3 class="text-4xl font-extrabold text-primary-500">500+</h3>
                         <p class="text-gray-300 mt-2">Active Clients</p>
                     </div>
-                    <div>
-                        <h3 class="text-4xl font-extrabold text-green-500">₹50Cr+</h3>
-                        <p class="text-gray-300 mt-2">Assets Under Management</p>
+                    <div class="stat-card bg-gray-800 p-6 rounded-lg animate-slide-up delay-200">
+                        <h3 class="text-4xl font-extrabold text-primary-500">₹50Cr+</h3>
+                        <p class="text-gray-300 mt-2">Assets Managed</p>
                     </div>
-                    <div>
-                        <h3 class="text-4xl font-extrabold text-green-500">10+</h3>
+                    <div class="stat-card bg-gray-800 p-6 rounded-lg animate-slide-up delay-300">
+                        <h3 class="text-4xl font-extrabold text-primary-500">10+</h3>
                         <p class="text-gray-300 mt-2">Years Experience</p>
                     </div>
-                    <div>
-                        <h3 class="text-4xl font-extrabold text-green-500">PAN</h3>
+                    <div class="stat-card bg-gray-800 p-6 rounded-lg animate-slide-up delay-400">
+                        <h3 class="text-4xl font-extrabold text-primary-500">PAN</h3>
                         <p class="text-gray-300 mt-2">India Service</p>
                     </div>
                 </div>
@@ -126,69 +309,111 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="py-20 bg-gray-900">
+        <section id="services" class="py-20 bg-dark-950">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4">Our <span class="text-green-500">Services</span></h2>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-12">Comprehensive financial solutions designed to help you build, grow, and protect your wealth in the Indian market.</p>
+                <h2 class="text-4xl font-bold mb-4 animate-slide-up">Our <span class="gradient-text">Services</span></h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-12 animate-slide-up delay-100">Comprehensive financial solutions designed to help you build, grow, and protect your wealth in the Indian market.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service Card 1: Stock Investments -->
-                    <div class="bg-[#1a1a1a] p-8 rounded-xl shadow-lg border border-gray-700 hover-border-green">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 14a3 3 0 100-6 3 3 0 000 6z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-100">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 14a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Stock Investments</h3>
                         <p class="text-gray-300">Strategic equity investments with research-backed recommendations and portfolio optimization.</p>
-                        <a href="#" class="text-green-500 font-medium mt-4 inline-block">Learn More &rarr;</a>
+                        <a href="#" class="text-primary-500 font-medium mt-4 inline-block hover:text-primary-400 transition-colors flex items-center justify-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                     <!-- Service Card 2: Portfolio Management -->
-                    <div class="bg-[#1a1a1a] p-8 rounded-xl shadow-lg border border-gray-700 hover-border-green">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 21h-2a2 2 0 01-2-2v-3a2 2 0 012-2h2a2 2 0 012 2v3a2 2 0 01-2 2zM12 21h-2a2 2 0 01-2-2v-5a2 2 0 012-2h2a2 2 0 012 2v5a2 2 0 01-2 2zM7 21H5a2 2 0 01-2-2v-9a2 2 0 012-2h2a2 2 0 012 2v9a2 2 0 01-2 2z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-200">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17 21h-2a2 2 0 01-2-2v-3a2 2 0 012-2h2a2 2 0 012 2v3a2 2 0 01-2 2zM12 21h-2a2 2 0 01-2-2v-5a2 2 0 012-2h2a2 2 0 012 2v5a2 2 0 01-2 2zM7 21H5a2 2 0 01-2-2v-9a2 2 0 012-2h2a2 2 0 012 2v9a2 2 0 01-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Portfolio Management</h3>
                         <p class="text-gray-300">Professional portfolio management services tailored to your risk profile and financial goals.</p>
-                        <a href="#" class="text-green-500 font-medium mt-4 inline-block">Learn More &rarr;</a>
+                        <a href="#" class="text-primary-500 font-medium mt-4 inline-block hover:text-primary-400 transition-colors flex items-center justify-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                     <!-- Service Card 3: Trading Services -->
-                    <div class="bg-[#1a1a1a] p-8 rounded-xl shadow-lg border border-gray-700 hover-border-green">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 21L12 3M12 3L6 9M12 3L18 9M12 21L18 15M12 21L6 15" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-300">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 21L12 3M12 3L6 9M12 3L18 9M12 21L18 15M12 21L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Trading Services</h3>
                         <p class="text-gray-300">Advanced trading strategies and market insights for active traders in equity and derivative markets.</p>
-                        <a href="#" class="text-green-500 font-medium mt-4 inline-block">Learn More &rarr;</a>
+                        <a href="#" class="text-primary-500 font-medium mt-4 inline-block hover:text-primary-400 transition-colors flex items-center justify-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                     <!-- Service Card 4: Mutual Funds -->
-                    <div class="bg-[#1a1a1a] p-8 rounded-xl shadow-lg border border-gray-700 hover-border-green">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 10V4.5a1.5 1.5 0 011.5-1.5h15A1.5 1.5 0 0121 4.5V10M12 17h6M12 17a2 2 0 00-2 2v2M12 17a2 2 0 012 2v2M12 17v-2a2 2 0 01-2-2h-2a2 2 0 01-2-2v-2" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 12V6M9 9l3-3 3 3M17 12V6M20 9l-3-3-3 3M7 12V6M4 9l3-3 3 3" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-400">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 10V4.5a1.5 1.5 0 011.5-1.5h15A1.5 1.5 0 0121 4.5V10M12 17h6M12 17a2 2 0 00-2 2v2M12 17a2 2 0 012 2v2M12 17v-2a2 2 0 01-2-2h-2a2 2 0 01-2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 12V6M9 9l3-3 3 3M17 12V6M20 9l-3-3-3 3M7 12V6M4 9l3-3 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Mutual Funds</h3>
                         <p class="text-gray-300">Diversified mutual fund investments with expert selection and portfolio construction for optimal returns.</p>
-                        <a href="#" class="text-green-500 font-medium mt-4 inline-block">Learn More &rarr;</a>
+                        <a href="#" class="text-primary-500 font-medium mt-4 inline-block hover:text-primary-400 transition-colors flex items-center justify-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                     <!-- Service Card 5: IPOs & Pre-IPO -->
-                    <div class="bg-[#1a1a1a] p-8 rounded-xl shadow-lg border border-gray-700 hover-border-green">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M18.828 15.172l-6.828 6.828-6.828-6.828a1.996 1.996 0 010-2.828l6.828-6.828 6.828 6.828a1.996 1.996 0 010 2.828z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-500">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.828 15.172l-6.828 6.828-6.828-6.828a1.996 1.996 0 010-2.828l6.828-6.828 6.828 6.828a1.996 1.996 0 010 2.828z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">IPOs & Pre-IPO</h3>
                         <p class="text-gray-300">Access to Initial Public Offerings and Pre-IPO investment opportunities with detailed research analysis.</p>
-                        <a href="#" class="text-green-500 font-medium mt-4 inline-block">Learn More &rarr;</a>
+                        <a href="#" class="text-primary-500 font-medium mt-4 inline-block hover:text-primary-400 transition-colors flex items-center justify-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                     <!-- Service Card 6: Personal Finance -->
-                    <div class="bg-[#1a1a1a] p-8 rounded-xl shadow-lg border border-gray-700 hover-border-green">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 21c-4.971 0-9-4.029-9-9s4.029-9 9-9 9 4.029 9 9-4.029 9-9 9z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M18.364 5.636L16.243 7.757M5.636 18.364L7.757 16.243M18.364 18.364L16.243 16.243M5.636 5.636L7.757 7.757" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-600">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 21c-4.971 0-9-4.029-9-9s4.029-9 9-9 9 4.029 9 9-4.029 9-9 9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.364 5.636L16.243 7.757M5.636 18.364L7.757 16.243M18.364 18.364L16.243 16.243M5.636 5.636L7.757 7.757" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Personal Finance</h3>
                         <p class="text-gray-300">Comprehensive financial planning including tax optimization, insurance, and retirement planning.</p>
-                        <a href="#" class="text-green-500 font-medium mt-4 inline-block">Learn More &rarr;</a>
+                        <a href="#" class="text-primary-500 font-medium mt-4 inline-block hover:text-primary-400 transition-colors flex items-center justify-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -197,47 +422,55 @@
         <!-- Why Choose Us Section -->
         <section id="about" class="py-20 bg-gray-900">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10 md:gap-20">
-                <div class="md:w-1/2 flex justify-center">
+                <div class="md:w-1/2 flex justify-center animate-fade-in">
                     <!-- Lazy-loading and descriptive alt text -->
-                    <img src="https://i.ibb.co/1JjLTtPB/20250903-1503-Choosing-Financial-Services-simple-compose-01k47epg9heg5spqm7hdmm3k8r.png" alt="20250903-1503-Choosing-Financial-Services-simple-compose-01k47epg9heg5spqm7hdmm3k8r" border="0">
+                    <img src="https://i.ibb.co/1JjLTtPB/20250903-1503-Choosing-Financial-Services-simple-compose-01k47epg9heg5spqm7hdmm3k8r.png" alt="Financial advisor consulting with clients" class="rounded-xl shadow-2xl max-w-full h-auto" loading="lazy">
                 </div>
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl font-bold mb-8">Why Choose <span class="text-green-500">The Rich Monkey?</span></h2>
+                <div class="md:w-1/2 animate-slide-up">
+                    <h2 class="text-4xl font-bold mb-8">Why Choose <span class="gradient-text">The Rich Monkey?</span></h2>
                     <ul class="space-y-6">
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#10B981"></path>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"></path>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">Pan-India Expertise</h3>
                                 <p class="text-gray-300">Deep understanding of Indian financial markets with comprehensive coverage across all major financial centers nationwide.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 4c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z" fill="#10B981"></path>
-                                <path d="M15.5 10a.5.5 0 00-.5.5v1.5H9v-1.5a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v2.5a.5.5 0 00.5.5h2.5a.5.5 0 00.5-.5v-1.5h6v1.5a.5.5 0 00.5.5h2.5a.5.5 0 00.5-.5v-2.5a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v1.5H15v-1.5a.5.5 0 00-.5-.5z" fill="#10B981"></path>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 4c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z" fill="currentColor"></path>
+                                    <path d="M15.5 10a.5.5 0 00-.5.5v1.5H9v-1.5a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v2.5a.5.5 0 00.5.5h2.5a.5.5 0 00.5-.5v-1.5h6v1.5a.5.5 0 00.5.5h2.5a.5.5 0 00.5-.5v-2.5a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v1.5H15v-1.5a.5.5 0 00-.5-.5z" fill="currentColor"></path>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">SEBI Registered</h3>
                                 <p class="text-gray-300">Fully compliant with Indian financial regulations and registered with SEBI for your security and trust.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M17 12H7M12 7v10" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M14 10l-2 2-2-2M14 14l-2-2-2 2" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M17 12H7M12 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 10l-2 2-2-2M14 14l-2-2-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">Personalized Approach</h3>
                                 <p class="text-gray-300">Tailored financial strategies that align with your unique goals, risk tolerance, and investment timeline.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 12H3M18 9l3 3-3 3M6 15l-3-3 3-3" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12H3M18 9l3 3-3 3M6 15l-3-3 3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">Proven Track Record</h3>
                                 <p class="text-gray-300">Consistent performance and successful portfolio management across various market cycles and conditions.</p>
@@ -249,164 +482,249 @@
         </section>
 
         <!-- Investment Process Section -->
-        <section class="py-20 bg-gray-900">
+        <section class="py-20 bg-dark-950">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4">Our <span class="text-green-500">Investment Process</span></h2>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-12">A systematic approach to wealth creation through disciplined investment strategies and continuous monitoring.</p>
+                <h2 class="text-4xl font-bold mb-4 animate-slide-up">Our <span class="gradient-text">Investment Process</span></h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-12 animate-slide-up delay-100">A systematic approach to wealth creation through disciplined investment strategies and continuous monitoring.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Step 1 -->
-                    <div class="p-8 rounded-xl shadow-lg border border-gray-700">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 14a3 3 0 100-6 3 3 0 000 6z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-100">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 14a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Research & Analysis</h3>
                         <p class="text-gray-300">Comprehensive market research, fundamental analysis, and risk assessment to identify optimal investment opportunities.</p>
                     </div>
                     <!-- Step 2 -->
-                    <div class="p-8 rounded-xl shadow-lg border border-gray-700">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 16a4 4 0 100-8 4 4 0 000 8z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 2c-.93 0-1.782.359-2.427.953M20.738 15.657a9.99 9.99 0 00-6.738-1.657M12 22c.93 0 1.782-.359 2.427-.953M3.262 8.343a9.99 9.99 0 006.738 1.657M18 12h-6M12 18V6" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-200">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 16a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 2c-.93 0-1.782.359-2.427.953M20.738 15.657a9.99 9.99 0 00-6.738-1.657M12 22c.93 0 1.782-.359 2.427-.953M3.262 8.343a9.99 9.99 0 006.738 1.657M18 12h-6M12 18V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Strategy Development</h3>
                         <p class="text-gray-300">Customized investment strategies based on your financial goals, risk tolerance, and market conditions.</p>
                     </div>
                     <!-- Step 3 -->
-                    <div class="p-8 rounded-xl shadow-lg border border-gray-700">
-                        <svg class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M15 9l-6 6M15 9V9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="p-8 rounded-xl shadow-lg border border-gray-800 card-hover animate-fade-in delay-300">
+                        <div class="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 9l-6 6M15 9V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2 text-white">Monitor & Optimize</h3>
                         <p class="text-gray-300">Continuous portfolio monitoring and regular rebalancing to ensure optimal performance and risk management.</p>
                     </div>
                 </div>
             </div>
-<section id="calculator" class="py-20 px-6 bg-gray-800">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold text-white mb-4">Calculate Your Wealth</h2>
-            <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
-                Use our interactive calculator to estimate your potential returns on a mutual fund investment.
-            </p>
-            <!-- Calculator inputs and results will be here -->
-            <div class="bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-700">
-                <form id="calculatorForm" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="flex flex-col text-left">
-                            <label for="initialInvestment" class="text-gray-400 mb-2">Initial Investment (₹)</label>
-                            <input type="number" id="initialInvestment" class="bg-gray-800 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 50000" min="0" required>
-                        </div>
-                        <div class="flex flex-col text-left">
-                            <label for="monthlySip" class="text-gray-400 mb-2">Monthly SIP (₹)</label>
-                            <input type="number" id="monthlySip" class="bg-gray-800 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 5000" min="0" required>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="flex flex-col text-left">
-                            <label for="expectedReturn" class="text-gray-400 mb-2">Expected Return Rate (%)</label>
-                            <input type="number" id="expectedReturn" class="bg-gray-800 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 12" min="0" required>
-                        </div>
-                        <div class="flex flex-col text-left">
-                            <label for="timePeriod" class="text-gray-400 mb-2">Time Period (Years)</label>
-                            <input type="number" id="timePeriod" class="bg-gray-800 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 10" min="1" required>
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <button type="submit" class="px-8 py-4 bg-green-500 text-white font-bold rounded-xl shadow-lg hover:bg-green-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                            Calculate
-                        </button>
-                    </div>
-                </form>
+        </section>
+
+        <!-- Investment Calculator Section -->
+        <section id="calculator" class="py-20 px-6 bg-gray-900">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-white mb-4 animate-slide-up">Calculate Your <span class="gradient-text">Wealth Potential</span></h2>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto animate-slide-up delay-100">
+                    Use our interactive calculator to estimate your potential returns on a mutual fund investment.
+                </p>
                 
-                <div id="results" class="mt-8 hidden">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
-                            <p class="text-lg font-semibold text-gray-400">Total Investment</p>
-                            <p id="totalInvestment" class="text-2xl font-bold text-green-500 mt-2">₹0</p>
+                <div class="bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700 animate-fade-in">
+                    <form id="calculatorForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col text-left">
+                                <label for="initialInvestment" class="text-gray-400 mb-2">Initial Investment (₹)</label>
+                                <input type="number" id="initialInvestment" class="input-field bg-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="e.g., 50000" min="0" required>
+                            </div>
+                            <div class="flex flex-col text-left">
+                                <label for="monthlySip" class="text-gray-400 mb-2">Monthly SIP (₹)</label>
+                                <input type="number" id="monthlySip" class="input-field bg-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="e.g., 5000" min="0" required>
+                            </div>
                         </div>
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
-                            <p class="text-lg font-semibold text-gray-400">Matured Value</p>
-                            <p id="maturedValue" class="text-2xl font-bold text-green-500 mt-2">₹0</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col text-left">
+                                <label for="expectedReturn" class="text-gray-400 mb-2">Expected Return Rate (%)</label>
+                                <input type="number" id="expectedReturn" class="input-field bg-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="e.g., 12" min="0" step="0.1" required>
+                            </div>
+                            <div class="flex flex-col text-left">
+                                <label for="timePeriod" class="text-gray-400 mb-2">Time Period (Years)</label>
+                                <input type="number" id="timePeriod" class="input-field bg-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="e.g., 10" min="1" required>
+                            </div>
                         </div>
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
-                            <p class="text-lg font-semibold text-gray-400">Total Profit</p>
-                            <p id="totalProfit" class="text-2xl font-bold text-green-500 mt-2">₹0</p>
+                        <div class="flex justify-center">
+                            <button type="submit" id="calculateBtn" class="px-8 py-4 bg-primary-500 text-white font-bold rounded-xl shadow-lg hover:bg-primary-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 flex items-center">
+                                Calculate
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="results" class="mt-8 hidden animate-fade-in">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                            <div class="bg-gray-700 p-6 rounded-2xl shadow-md">
+                                <p class="text-lg font-semibold text-gray-400">Total Investment</p>
+                                <p id="totalInvestment" class="text-2xl font-bold text-primary-500 mt-2">₹0</p>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-2xl shadow-md">
+                                <p class="text-lg font-semibold text-gray-400">Matured Value</p>
+                                <p id="maturedValue" class="text-2xl font-bold text-primary-500 mt-2">₹0</p>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-2xl shadow-md">
+                                <p class="text-lg font-semibold text-gray-400">Total Profit</p>
+                                <p id="totalProfit" class="text-2xl font-bold text-primary-500 mt-2">₹0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 bg-gray-700 p-6 rounded-2xl">
+                            <h3 class="text-xl font-semibold text-white mb-4">Wealth Growth Visualization</h3>
+                            <div class="h-4 bg-gray-600 rounded-full overflow-hidden">
+                                <div id="growthBar" class="h-full bg-primary-500 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                            </div>
+                            <div class="flex justify-between mt-2 text-sm text-gray-400">
+                                <span>Investment</span>
+                                <span>Wealth Growth</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 bg-dark-950">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 animate-slide-up">What Our <span class="gradient-text">Clients Say</span></h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-12 animate-slide-up delay-100">Hear from investors who have achieved their financial goals with our guidance.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 animate-fade-in delay-100">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary-500/10 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl">⭐</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Rajesh Kumar</h4>
+                                <p class="text-primary-500 text-sm">Mumbai Investor</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-left">"The Rich Monkey helped me diversify my portfolio with strategic stock recommendations. My investments have grown by 35% in just 2 years."</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 animate-fade-in delay-200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary-500/10 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl">⭐</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Priya Sharma</h4>
+                                <p class="text-primary-500 text-sm">Delhi Professional</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-left">"Their personalized approach to portfolio management has given me financial security and peace of mind. Highly recommend their services!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 animate-fade-in delay-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary-500/10 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl">⭐</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Amit Patel</h4>
+                                <p class="text-primary-500 text-sm">Bangalore Entrepreneur</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-left">"The IPO guidance I received was exceptional. I've seen significant returns on my pre-IPO investments with their expert analysis."</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="py-20 bg-gray-900">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10 md:gap-20">
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl font-bold mb-4">Get Started with <span class="text-green-500">Smart Investing</span></h2>
+                <div class="md:w-1/2 animate-slide-up">
+                    <h2 class="text-4xl font-bold mb-4">Get Started with <span class="gradient-text">Smart Investing</span></h2>
                     <p class="text-lg text-gray-300 mb-8">Ready to take control of your financial future? Contact our expert team for a personalized consultation.</p>
                     <ul class="space-y-6">
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zM12 15a3 3 0 100-6 3 3 0 000 6z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M18.364 5.636L16.243 7.757M5.636 18.364L7.757 16.243M18.364 18.364L16.243 16.243M5.636 5.636L7.757 7.757" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zM12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M18.364 5.636L16.243 7.757M5.636 18.364L7.757 16.243M18.364 18.364L16.243 16.243M5.636 5.636L7.757 7.757" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">Head Office</h3>
                                 <p class="text-gray-300">Mumbai, Maharashtra</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 16.5c-1.39-1.39-3.21-2.09-5.11-2.09-1.9 0-3.72.7-5.11 2.09L8.4 18.1a2 2 0 01-2.83-2.83l1.45-1.45a3.5 3.5 0 000-4.95l-1.45-1.45A2 2 0 008.4 5.9L9.85 7.35a3.5 3.5 0 004.95 0L16.2 5.9c1.39-1.39 3.21-2.09 5.11-2.09 1.9 0 3.72.7 5.11 2.09z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 21c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 16.5c-1.39-1.39-3.21-2.09-5.11-2.09-1.9 0-3.72.7-5.11 2.09L8.4 18.1a2 2 0 01-2.83-2.83l1.45-1.45a3.5 3.5 0 000-4.95l-1.45-1.45A2 2 0 008.4 5.9L9.85 7.35a3.5 3.5 0 004.95 0L16.2 5.9c1.39-1.39 3.21-2.09 5.11-2.09 1.9 0 3.72.7 5.11 2.09z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 21c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">Phone</h3>
                                 <p class="text-gray-300">+91 99878 68616</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18 6L12 12 6 6M18 6H6C4.895 6 4 6.895 4 8v8a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L12 12 6 6M18 6H6C4.895 6 4 6.895 4 8v8a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">Email</h3>
-                                <p class="text-gray-300">info@therichmonkey.in | therichmonkeyinvestments@gmail.com</p>
+                                <p class="text-gray-300">info@therichmonkey.in<br>therichmonkeyinvestments@gmail.com</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <svg class="h-8 w-8 text-green-500 flex-shrink-0 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 6v6l4 2" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="h-6 w-6 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-white">Business Hours</h3>
-                                <p class="text-gray-300">Mon-Fri: 9:00 AM - 6:00 PM IST</p>
+                                <p class="text-gray-300">Mon-Fri: 9:00 AM - 6:00 PM IST<br>Sat: 10:00 AM - 2:00 PM IST</p>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="md:w-1/2 p-8 rounded-xl shadow-lg border border-gray-700">
+                <div class="md:w-1/2 p-8 rounded-xl shadow-lg border border-gray-700 bg-gray-800 animate-fade-in delay-200">
                     <h3 class="text-2xl font-bold mb-6 text-white">Request a Consultation</h3>
-                    <form name="contact" method="POST" data-netlify="true" class="space-y-4">
+                    <form name="contact" method="POST" data-netlify="true" class="space-y-4" netlify-honeypot="bot-field">
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <!-- Accessibility Fixes for Form Inputs -->
                             <label for="firstName" class="sr-only">First Name</label>
-                            <input id="firstName" type="text" name="firstName" placeholder="First Name" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:border-green-500">
+                            <input id="firstName" type="text" name="firstName" placeholder="First Name" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-primary-500 input-field" required>
                             
                             <label for="lastName" class="sr-only">Last Name</label>
-                            <input id="lastName" type="text" name="lastName" placeholder="Last Name" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:border-green-500">
+                            <input id="lastName" type="text" name="lastName" placeholder="Last Name" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-primary-500 input-field" required>
                         </div>
                         <label for="email" class="sr-only">Email Address</label>
-                        <input id="email" type="email" name="email" placeholder="Email Address" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:border-green-500">
+                        <input id="email" type="email" name="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-primary-500 input-field" required>
                         
                         <label for="phone" class="sr-only">Phone Number</label>
-                        <input id="phone" type="tel" name="phone" placeholder="Phone Number" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-600 focus:outline-none focus:border-green-500">
+                        <input id="phone" type="tel" name="phone" placeholder="Phone Number" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-primary-500 input-field" required>
                         
                         <label for="service" class="sr-only">Select a service</label>
-                        <select id="service" name="service" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-400 border border-gray-600 focus:outline-none focus:border-green-500">
+                        <select id="service" name="service" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-300 border border-gray-600 focus:outline-none focus:border-primary-500 input-field" required>
                             <option value="">Select a service</option>
                             <option>Stock Investments</option>
                             <option>Portfolio Management</option>
@@ -416,14 +734,21 @@
                             <option>Personal Finance</option>
                         </select>
                         <label for="investmentRange" class="sr-only">Select investment range</label>
-                        <select id="investmentRange" name="investmentRange" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-400 border border-gray-600 focus:outline-none focus:border-green-500">
+                        <select id="investmentRange" name="investmentRange" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-300 border border-gray-600 focus:outline-none focus:border-primary-500 input-field" required>
                             <option value="">Select investment range</option>
                             <option>₹1L - ₹5L</option>
                             <option>₹5L - ₹10L</option>
                             <option>₹10L - ₹50L</option>
                             <option>₹50L+</option>
                         </select>
-                        <button type="submit" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg shadow-lg hover:bg-green-600 transition-colors duration-300 transform hover:scale-105">Submit Request</button>
+                        <label for="message" class="sr-only">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your financial goals" rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-primary-500 input-field"></textarea>
+                        <button type="submit" class="w-full bg-primary-500 text-white font-bold py-3 rounded-lg shadow-lg hover:bg-primary-600 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center">
+                            Submit Request
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -431,53 +756,64 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#0d0d0d] py-12 border-t border-gray-800">
+    <footer class="bg-dark-950 py-12 border-t border-gray-800">
         <div class="container mx-auto px-6 text-center md:text-left">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
                 <div>
-                    <a href="#" class="text-2xl font-bold text-green-500">The Rich Monkey<br><span class="text-sm font-normal text-gray-400">INVESTMENTS</span></a>
+                    <a href="#" class="text-2xl font-bold text-primary-500 flex items-center">
+                        <span class="mr-2">🐵</span>
+                        <span>The Rich Monkey<br><span class="text-sm font-normal text-gray-400">INVESTMENTS</span></span>
+                    </a>
                     <p class="text-gray-300 mt-4 max-w-sm">Your trusted partner for financial growth in the Indian market. Professional investment services across India.</p>
                     <div class="flex items-center gap-4 mt-6">
-                        <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank">
-                            <svg class="h-6 w-6 text-gray-400 hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-primary-500 hover:bg-gray-700 transition-colors">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.765s.784-1.764 1.75-1.764 1.75.79 1.75 1.764c0 .975-.784 1.765-1.75 1.765zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
                             </svg>
                         </a>
-                        <a href="https://twitter.com" aria-label="Twitter" target="_blank">
-                            <svg class="h-6 w-6 text-gray-400 hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.59 0-6.495 2.906-6.495 6.495 0 .509.054 1.002.161 1.481-5.396-.27-10.177-2.854-13.38-6.779-.561.961-.887 2.083-.887 3.298 0 2.251 1.144 4.248 2.887 5.419-.948-.029-1.848-.29-2.631-.724v.081c0 3.159 2.245 5.798 5.215 6.417-.547.149-1.127.23-1.729.23-.424 0-.834-.039-1.236-.118.825 2.583 3.205 4.471 6.03 4.529-2.179 1.708-4.925 2.73-7.904 2.73-.513 0-1.02-.031-1.518-.088 3.016 1.933 6.594 3.064 10.46 3.064 12.559 0 19.349-10.45 19.349-19.35 0-.295-.006-.59-.018-.885.845-.611 1.579-1.373 2.158-2.241z"></path>
+                        <a href="https://twitter.com" aria-label="Twitter" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-primary-500 hover:bg-gray-700 transition-colors">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.59 0-6.495 2.906-6.495 6.495 0 .509.054 1.002.161 1.481-5.396-.27-10.177-2.854-13.380-6.779-.561.961-.887 2.083-.887 3.298 0 2.251 1.144 4.248 2.887 5.419-.948-.029-1.848-.29-2.631-.724v.081c0 3.159 2.245 5.798 5.215 6.417-.547.149-1.127.23-1.729.230-.424 0-.834-.039-1.236-.118.825 2.583 3.205 4.471 6.03 4.529-2.179 1.708-4.925 2.730-7.904 2.730-.513 0-1.020-.031-1.518-.088 3.016 1.933 6.594 3.064 10.460 3.064 12.559 0 19.349-10.450 19.349-19.350 0-.295-.006-.590-.018-.885.845-.611 1.579-1.373 2.158-2.241z"></path>
                             </svg>
                         </a>
-                        <a href="https://facebook.com" aria-label="Facebook" target="_blank">
-                            <svg class="h-6 w-6 text-gray-400 hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="https://facebook.com" aria-label="Facebook" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-primary-500 hover:bg-gray-700 transition-colors">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.996c0-.563.447-.644 1.109-.644h2.891v-4h-3c-4.195 0-4.14 4.86-4 6v-2h3z"></path>
                             </svg>
                         </a>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold mb-4 text-green-500">Services</h3>
+                    <h3 class="text-xl font-bold mb-4 text-primary-500">Services</h3>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="#" class="hover:text-white">Stock Investments</a></li>
-                        <li><a href="#" class="hover:text-white">Portfolio Management</a></li>
-                        <li><a href="#" class="hover:text-white">Trading Services</a></li>
-                        <li><a href="#" class="hover:text-white">Mutual Funds</a></li>
-                        <li><a href="#" class="hover:text-white">IPOs & Pre-IPO</a></li>
-                        <li><a href="#" class="hover:text-white">Personal Finance</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Stock Investments</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Portfolio Management</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Trading Services</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Mutual Funds</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">IPOs & Pre-IPO</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Personal Finance</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold mb-4 text-green-500">Company</h3>
+                    <h3 class="text-xl font-bold mb-4 text-primary-500">Company</h3>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="#" class="hover:text-white">About Us</a></li>
-                        <li><a href="#" class="hover:text-white">Contact</a></li>
-                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Terms of Service</a></li>
                     </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-primary-500">Newsletter</h3>
+                    <p class="text-gray-300 mb-4">Subscribe to our newsletter for market insights and investment tips.</p>
+                    <form class="flex flex-col space-y-2">
+                        <input type="email" placeholder="Your email address" class="px-4 py-2 rounded-lg bg-gray-800 text-gray-100 border border-gray-700 focus:outline-none focus:border-primary-500">
+                        <button type="submit" class="bg-primary-500 text-white font-medium py-2 rounded-lg hover:bg-primary-600 transition-colors">Subscribe</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="container mx-auto px-6 text-center mt-10">
+        <div class="container mx-auto px-6 text-center mt-10 pt-6 border-t border-gray-800">
             <p class="text-gray-500 text-sm">&copy; 2024 The Rich Monkey. All rights reserved. | SEBI Registered Investment Advisor</p>
             <p class="text-gray-300 text-xs mt-2">Investments are subject to market risks. Please read all related documents carefully before investing.</p>
         </div>
@@ -515,56 +851,106 @@
             mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.classList.toggle('hidden');
         });
-    </script>
-<script>
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with animation classes
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Calculator functionality
         document.addEventListener('DOMContentLoaded', () => {
             const calculatorForm = document.getElementById('calculatorForm');
             const resultsDiv = document.getElementById('results');
+            const calculateBtn = document.getElementById('calculateBtn');
             const initialInvestmentInput = document.getElementById('initialInvestment');
             const monthlySipInput = document.getElementById('monthlySip');
             const expectedReturnInput = document.getElementById('expectedReturn');
             const timePeriodInput = document.getElementById('timePeriod');
+            const growthBar = document.getElementById('growthBar');
             
             calculatorForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-
-                // Get values and convert to numbers
-                const initialInvestment = parseFloat(initialInvestmentInput.value) || 0;
-                const monthlySip = parseFloat(monthlySipInput.value) || 0;
-                const expectedReturn = parseFloat(expectedReturnInput.value) || 0;
-                const timePeriod = parseFloat(timePeriodInput.value) || 0;
-
-                // Validate inputs
-                if (initialInvestment < 0 || monthlySip < 0 || expectedReturn < 0 || timePeriod <= 0) {
-                    // In a real application, you'd show a user-friendly error message here
-                    return;
-                }
-
-                // Calculations
-                const annualReturnRate = expectedReturn / 100;
-                const monthlyReturnRate = annualReturnRate / 12;
-                const totalMonths = timePeriod * 12;
                 
-                // Lumpsum future value
-                const lumpsumFutureValue = initialInvestment * Math.pow((1 + annualReturnRate), timePeriod);
+                // Show loading state
+                calculateBtn.innerHTML = 'Calculating <span class="loading ml-2"></span>';
+                calculateBtn.disabled = true;
                 
-                // SIP future value using the formula
-                const sipFutureValue = monthlySip * ((Math.pow((1 + monthlyReturnRate), totalMonths) - 1) / monthlyReturnRate) * (1 + monthlyReturnRate);
+                setTimeout(() => {
+                    // Get values and convert to numbers
+                    const initialInvestment = parseFloat(initialInvestmentInput.value) || 0;
+                    const monthlySip = parseFloat(monthlySipInput.value) || 0;
+                    const expectedReturn = parseFloat(expectedReturnInput.value) || 0;
+                    const timePeriod = parseFloat(timePeriodInput.value) || 0;
 
-                const totalMaturedValue = lumpsumFutureValue + sipFutureValue;
-                const totalInvested = initialInvestment + (monthlySip * totalMonths);
-                const totalProfit = totalMaturedValue - totalInvested;
+                    // Validate inputs
+                    if (initialInvestment < 0 || monthlySip < 0 || expectedReturn < 0 || timePeriod <= 0) {
+                        // In a real application, you'd show a user-friendly error message here
+                        calculateBtn.innerHTML = 'Calculate <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>';
+                        calculateBtn.disabled = false;
+                        return;
+                    }
 
-                // Display results
-                document.getElementById('totalInvestment').textContent = `₹${totalInvested.toFixed(2)}`;
-                document.getElementById('maturedValue').textContent = `₹${totalMaturedValue.toFixed(2)}`;
-                document.getElementById('totalProfit').textContent = `₹${totalProfit.toFixed(2)}`;
+                    // Calculations
+                    const annualReturnRate = expectedReturn / 100;
+                    const monthlyReturnRate = annualReturnRate / 12;
+                    const totalMonths = timePeriod * 12;
+                    
+                    // Lumpsum future value
+                    const lumpsumFutureValue = initialInvestment * Math.pow((1 + annualReturnRate), timePeriod);
+                    
+                    // SIP future value using the formula
+                    const sipFutureValue = monthlySip * ((Math.pow((1 + monthlyReturnRate), totalMonths) - 1) / monthlyReturnRate) * (1 + monthlyReturnRate);
 
-                resultsDiv.classList.remove('hidden');
+                    const totalMaturedValue = lumpsumFutureValue + sipFutureValue;
+                    const totalInvested = initialInvestment + (monthlySip * totalMonths);
+                    const totalProfit = totalMaturedValue - totalInvested;
+                    
+                    // Calculate growth percentage for visualization
+                    const growthPercentage = Math.min(100, (totalProfit / totalInvested) * 100);
+
+                    // Display results with formatting
+                    document.getElementById('totalInvestment').textContent = `₹${formatNumber(totalInvested.toFixed(0))}`;
+                    document.getElementById('maturedValue').textContent = `₹${formatNumber(totalMaturedValue.toFixed(0))}`;
+                    document.getElementById('totalProfit').textContent = `₹${formatNumber(totalProfit.toFixed(0))}`;
+                    
+                    // Animate growth bar
+                    growthBar.style.width = '0%';
+                    setTimeout(() => {
+                        growthBar.style.width = `${growthPercentage}%`;
+                    }, 100);
+
+                    resultsDiv.classList.remove('hidden');
+                    
+                    // Scroll to results
+                    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Reset button
+                    calculateBtn.innerHTML = 'Calculate <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>';
+                    calculateBtn.disabled = false;
+                }, 800);
             });
+            
+            // Format numbers with commas
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
         });
     </script>
 </body>
 </html>
-
-
